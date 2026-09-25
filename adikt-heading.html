@@ -1,0 +1,43 @@
+<!--
+  ADIKT heading for adikt.site
+  Paste this whole block into a custom HTML / embed code section.
+  All styles are scoped to .adikt-heading so they won't affect the rest of the site.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+  .adikt-heading {
+    --adikt-bg: #0b0b0c;
+    --adikt-text: #ffffff;
+    --adikt-accent: #e11d48;
+
+    background: var(--adikt-bg);
+    padding: clamp(48px, 10vw, 120px) 16px;
+    text-align: center;
+  }
+
+  .adikt-heading h1 {
+    margin: 0;
+    font-family: "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+    font-weight: 400;
+    font-size: clamp(64px, 18vw, 200px);
+    line-height: 0.9;
+    letter-spacing: 0.08em;
+    color: var(--adikt-text);
+  }
+
+  .adikt-heading h1::after {
+    content: "";
+    display: block;
+    width: 1.2em;
+    height: 0.06em;
+    margin: 0.18em auto 0;
+    background: var(--adikt-accent);
+  }
+</style>
+
+<header class="adikt-heading">
+  <h1>ADIKT</h1>
+</header>
