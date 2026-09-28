@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADIKT — Built for Repetition</title>
+<meta name="description" content="ADIKT — vintage-washed, hand-finished streetwear. Hoodies, zip-ups, gym shorts and crew socks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0b0b0b;
+    --ink-2: #151515;
+    --paper: #f3efe7;
+    --muted: #8d8a84;
+    --red: #d7261e;
+    --yellow: #f2c230;
+    --line: rgba(243, 239, 231, 0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .display { font-family: "Anton", Impact, sans-serif; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.9; }
+  .wrap { width: min(1280px, 100% - 32px); margin-inline: auto; }
+
+  /* Marquee */
+  .marquee { background: var(--red); color: var(--paper); overflow: hidden; white-space: nowrap; font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .marquee__track { display: inline-flex; gap: 48px; padding: 10px 0; animation: scroll 28s linear infinite; }
+  .marquee__track span::after { content: "✦"; margin-left: 48px; color: var(--yellow); }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 20; background: rgba(11, 11, 11, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-size: 30px; }
+  .nav__links { display: flex; gap: 28px; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .nav__links a:hover { color: var(--yellow); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; font-weight: 700; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; border: 2px solid var(--paper); transition: transform .2s, background .2s, color .2s; }
+  .btn--solid { background: var(--paper); color: var(--ink); }
+  .btn--solid:hover { background: var(--yellow); border-color: var(--yellow); }
+  .btn--ghost:hover { background: var(--paper); color: var(--ink); }
+  .btn--sm { padding: 10px 18px; font-size: 12px; }
+
+  /* Hero */
+  .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); min-height: calc(100vh - 100px); border-bottom: 1px solid var(--line); }
+  .hero__copy { display: flex; flex-direction: column; justify-content: center; gap: 28px; padding: 64px 48px 64px max(16px, (100vw - 1280px) / 2); }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--yellow); }
+  .hero h1 { font-size: clamp(64px, 10vw, 180px); }
+  .hero h1 em { font-style: normal; color: transparent; -webkit-text-stroke: 2px var(--paper); }
+  .hero p { max-width: 460px; font-size: 18px; color: #cfcac1; }
+  .hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero__img { position: relative; overflow: hidden; background: var(--ink-2); }
+  .hero__img img { filter: contrast(1.05) saturate(0.95); transform: scale(1.02); }
+  .hero__tag { position: absolute; left: 20px; bottom: 20px; background: var(--paper); color: var(--ink); padding: 14px 18px; }
+  .hero__tag strong { display: block; font-family: "Anton", sans-serif; font-size: 22px; text-transform: uppercase; }
+  .hero__tag span { font-size: 13px; }
+
+  /* Section heads */
+  section { padding: 96px 0; }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+  .head h2 { font-size: clamp(48px, 7vw, 96px); }
+
+  /* Products */
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .card { position: relative; display: flex; flex-direction: column; gap: 14px; }
+  .card__img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--ink-2); }
+  .card__img img { transition: transform .6s ease; }
+  .card:hover .card__img img { transform: scale(1.06); }
+  .badge { position: absolute; top: 12px; left: 12px; padding: 5px 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: var(--yellow); color: var(--ink); }
+  .badge--out { background: var(--paper); }
+  .badge--low { background: var(--red); color: var(--paper); }
+  .card__meta { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+  .card__meta .price { color: var(--muted); white-space: nowrap; }
+  .card--wide { grid-column: span 2; grid-row: span 2; }
+  .card--wide .card__img { aspect-ratio: auto; flex: 1; }
+
+  /* Story */
+  .story { background: var(--paper); color: var(--ink); }
+  .story .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .story__img { aspect-ratio: 4 / 5; overflow: hidden; }
+  .story h2 { font-size: clamp(56px, 8vw, 120px); margin-bottom: 28px; }
+  .story h2 span { color: var(--red); }
+  .story p { font-size: 18px; max-width: 520px; margin-bottom: 18px; color: #3a3833; }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; border-top: 2px solid var(--ink); padding-top: 24px; }
+  .pillars strong { display: block; font-family: "Anton", sans-serif; font-size: 22px; text-transform: uppercase; }
+  .pillars span { font-size: 14px; color: #5b5850; }
+
+  /* Socks */
+  .socks__row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); }
+  .sock { position: relative; aspect-ratio: 1; overflow: hidden; border-right: 1px solid var(--line); }
+  .sock:last-child { border-right: 0; }
+  .sock img { transition: transform .5s; }
+  .sock:hover img { transform: scale(1.08); }
+  .sock__label { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px 16px; display: flex; justify-content: space-between; background: linear-gradient(transparent, rgba(0,0,0,.75)); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 13px; }
+
+  /* CTA */
+  .cta { background: var(--red); text-align: center; padding: 120px 0; }
+  .cta h2 { font-size: clamp(56px, 10vw, 150px); margin-bottom: 20px; }
+  .cta p { font-size: 18px; margin-bottom: 36px; }
+  .signup { display: flex; max-width: 520px; margin: 0 auto; border: 2px solid var(--paper); }
+  .signup input { flex: 1; min-width: 0; background: transparent; border: 0; padding: 16px 18px; color: var(--paper); font: inherit; font-size: 16px; }
+  .signup input::placeholder { color: rgba(243,239,231,.7); }
+  .signup input:focus { outline: none; }
+  .signup button { border: 0; background: var(--paper); color: var(--ink); padding: 0 24px; font: 700 14px "Inter", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; }
+  .signup button:hover { background: var(--ink); color: var(--paper); }
+
+  /* Footer */
+  footer { padding: 56px 0 32px; border-top: 1px solid var(--line); }
+  footer .wrap { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
+  footer .big { font-size: clamp(80px, 16vw, 220px); color: var(--ink-2); -webkit-text-stroke: 1px #2a2a2a; grid-column: 1 / -1; margin-top: 24px; }
+  footer h4 { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  footer ul { list-style: none; display: grid; gap: 8px; font-size: 15px; }
+  footer ul a:hover { color: var(--yellow); }
+  .fine { font-size: 13px; color: var(--muted); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+    .hero__copy { padding: 56px 16px 40px; }
+    .hero__img { aspect-ratio: 4 / 5; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .card--wide { grid-row: auto; }
+    .card--wide .card__img { flex: none; aspect-ratio: 4 / 5; }
+    .story .wrap { grid-template-columns: 1fr; gap: 40px; }
+    .socks__row { grid-template-columns: repeat(2, 1fr); }
+    .sock:nth-child(2) { border-right: 0; }
+    .sock:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    footer .wrap { grid-template-columns: 1fr 1fr; }
+    footer .wrap > div:first-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 640px) {
+    .nav__links { display: none; }
+    section { padding: 72px 0; }
+    .grid { gap: 14px; }
+    .card--wide { grid-column: span 2; }
+    .card__meta { flex-direction: column; gap: 2px; font-size: 13px; }
+    .pillars { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>New drop: Blue Washed Zip Up</span><span>Hand-finished, every piece</span><span>Built for repetition</span><span>Free socks energy — mix &amp; match 4 colors</span>
+    <span>New drop: Blue Washed Zip Up</span><span>Hand-finished, every piece</span><span>Built for repetition</span><span>Free socks energy — mix &amp; match 4 colors</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" class="logo display">Adikt</a>
+    <nav class="nav__links">
+      <a href="#shop">Shop</a>
+      <a href="#story">Story</a>
+      <a href="#socks">Socks</a>
+    </nav>
+    <a class="btn btn--solid btn--sm" href="https://adikt.site/collections/all">Shop all</a>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero" style="padding:0">
+    <div class="hero__copy">
+      <span class="eyebrow">Fall ’26 — Now live</span>
+      <h1 class="display">Built for<br><em>repetition.</em></h1>
+      <p>Vintage-washed, hand-distressed and custom-painted streetwear. Worn in from day one — and only better every cycle.</p>
+      <div class="hero__ctas">
+        <a class="btn btn--solid" href="#shop">Shop the drop →</a>
+        <a class="btn btn--ghost" href="#story">What is ADIKT</a>
+      </div>
+    </div>
+    <a class="hero__img" href="https://adikt.site/products/adikt-blue-washed-zip-up">
+      <img src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/MagicEraser_260907_080457.jpg?v=1788787269&width=1400" alt="ADIKT Blue Washed Zip Up">
+      <div class="hero__tag"><strong>Blue Washed Zip Up</strong><span>New · $80</span></div>
+    </a>
+  </section>
+
+  <!-- Products -->
+  <section id="shop">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 class="display">The lineup</h2>
+        <a class="btn btn--ghost btn--sm" href="https://adikt.site/collections/all">View all →</a>
+      </div>
+      <div class="grid">
+        <a class="card card--wide reveal" href="https://adikt.site/products/jojo-hoodie-1">
+          <div class="card__img">
+            <span class="badge badge--low">Low stock</span>
+            <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/IMG-0001.jpg?v=1782772694&width=1200" alt="JOJO Vintage Black Hoodie">
+          </div>
+          <div class="card__meta"><span>“JOJO” Vintage Black Hoodie</span><span class="price">$80</span></div>
+        </a>
+        <a class="card reveal" href="https://adikt.site/products/adikt-blue-washed-zip-up">
+          <div class="card__img">
+            <span class="badge">New</span>
+            <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/MagicEraser_260907_080457.jpg?v=1788787269&width=800" alt="ADIKT Blue Washed Zip Up">
+          </div>
+          <div class="card__meta"><span>Blue Washed Zip Up</span><span class="price">$80</span></div>
+        </a>
+        <a class="card reveal" href="https://adikt.site/products/mesh-retro-gym-shorts">
+          <div class="card__img">
+            <span class="badge">New</span>
+            <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/MagicEraser_260907_094352.jpg?v=1788792736&width=800" alt="ADIKT Navy Mesh Retro Gym Shorts">
+          </div>
+          <div class="card__meta"><span>Navy Mesh Retro Gym Shorts</span><span class="price">$45</span></div>
+        </a>
+        <a class="card reveal" href="https://adikt.site/products/red-racing-zip-up">
+          <div class="card__img">
+            <span class="badge badge--out">Sold out</span>
+            <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/8E1CEDCE-D4E8-45A7-8B65-7BB2DB0094F4.jpg?v=1764013646&width=800" alt="Red Racing Zip Up">
+          </div>
+          <div class="card__meta"><span>Red Racing Zip Up</span><span class="price">$120</span></div>
+        </a>
+        <a class="card reveal" href="https://adikt.site/products/adikt-socks-1">
+          <div class="card__img">
+            <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/IMG-6236.jpg?v=1783613227&width=800" alt="ADIKT Crew Socks in Red">
+          </div>
+          <div class="card__meta"><span>Crew Socks — Red</span><span class="price">$10</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section id="story" class="story">
+    <div class="wrap">
+      <div class="story__img reveal">
+        <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/IMG-0001.jpg?v=1782772694&width=1200" alt="JOJO hoodie detail">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--red)">The name</span>
+        <h2 class="display">One word:<br><span>addict.</span></h2>
+        <p>“JOJO” translates to one word — addict. That’s the whole idea. The pieces you reach for again and again, until they’re part of you.</p>
+        <p>Every garment is washed, painted and distressed by hand, so no two are ever exactly alike. Evolution isn’t a finish line; it’s a habit.</p>
+        <div class="pillars">
+          <div><strong>Hand-finished</strong><span>Custom paint &amp; distressing</span></div>
+          <div><strong>Vintage wash</strong><span>Soft from the first wear</span></div>
+          <div><strong>Small runs</strong><span>Limited sizes, no restocks promised</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Socks -->
+  <section id="socks">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 class="display">The finishing<br>piece</h2>
+        <p style="max-width:360px;color:#cfcac1">Ribbed crew socks with the embroidered ADIKT logo. Four colors, $10 each — mix and match.</p>
+      </div>
+      <div class="socks__row reveal">
+        <a class="sock" href="https://adikt.site/products/adikt-socks">
+          <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/IMG-6237.jpg?v=1783613227&width=700" alt="Yellow crew socks">
+          <div class="sock__label"><span>Yellow</span><span>$10</span></div>
+        </a>
+        <a class="sock" href="https://adikt.site/products/adikt-socks-1">
+          <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/IMG-6236.jpg?v=1783613227&width=700" alt="Red crew socks">
+          <div class="sock__label"><span>Red</span><span>$10</span></div>
+        </a>
+        <a class="sock" href="https://adikt.site/products/adikt-socks-copy">
+          <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/56ED4E9B-135D-4074-AFE4-78E276314B6D.png?v=1779725426&width=700" alt="Pink crew socks">
+          <div class="sock__label"><span>Pink</span><span>$10</span></div>
+        </a>
+        <a class="sock" href="https://adikt.site/products/adikt-socks-copy-1">
+          <img loading="lazy" src="https://cdn.shopify.com/s/files/1/0749/1400/5308/files/CDBE5516-DD14-4CCD-B834-F4E0BC39FB36.png?v=1779847470&width=700" alt="White crew socks">
+          <div class="sock__label"><span>White</span><span>$10</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap reveal">
+      <h2 class="display">Get hooked.</h2>
+      <p>Early access to every drop. No spam — just the good stuff.</p>
+      <form class="signup" action="https://adikt.site/contact#newsletter" method="post">
+        <input type="hidden" name="form_type" value="customer">
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input type="email" name="contact[email]" placeholder="your@email.com" required aria-label="Email address">
+        <button type="submit">Join</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="#" class="logo display" style="font-size:40px">Adikt</a>
+      <p class="fine" style="margin-top:10px;max-width:320px">Vintage-washed, hand-finished streetwear. Built for repetition.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="https://adikt.site/collections/all">All products</a></li>
+        <li><a href="https://adikt.site/collections/summer-collection">Summer collection</a></li>
+        <li><a href="#socks">Socks</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <ul>
+        <li><a href="https://adikt.site/pages/contact">Contact</a></li>
+        <li><a href="https://adikt.site/policies/shipping-policy">Shipping</a></li>
+        <li><a href="https://adikt.site/policies/refund-policy">Returns</a></li>
+      </ul>
+    </div>
+    <div class="big display" aria-hidden="true">Adikt</div>
+    <p class="fine">© 2026 ADIKT. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
